@@ -194,7 +194,19 @@ function rayColour(ray)
     let ambient = 0.05
     let specular = gamma * 0.8
 
-    let colour = albedo.scale(ambient + diffuse + specular)
+    let shadowRay = new Ray(castResult.position, negLightDirection)
+    let shadowHit = traceRay(shadowRay)
+    
+    if (shadowHit.t > 0)
+    {
+        shadowFactor = 0.4
+    }
+    else 
+    {
+        shadowFactor = 1.0
+    }
+
+    let colour = albedo.scale((ambient + diffuse + specular) * shadowFactor)
     return colour
 }
 
