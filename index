@@ -207,7 +207,7 @@ function rayColour(ray)
     }
 
     let colour = albedo.scale((ambient + diffuse + specular) * shadowFactor)
-    return colour
+    return new Vec3(Math.sqrt(colour.x), Math.sqrt(colour.y), Math.sqrt(colour.z))
 }
 
 function setPixel(x, y, colour)
